@@ -1,9 +1,11 @@
 package se.smelly.eat.models;
 
+import org.springframework.data.mongodb.core.index.Indexed;
+
 public class MeasuredIngredient {
 	
 
-	
+	@Indexed
 	private Ingredient ingredient;
 	private Measurement measurement;
 	private double amount;

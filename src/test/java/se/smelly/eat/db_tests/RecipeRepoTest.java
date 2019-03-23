@@ -1,22 +1,19 @@
 package se.smelly.eat.db_tests;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import reactor.core.publisher.Flux;
-
-import static org.junit.Assert.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import se.smelly.eat.models.Ingredient;
 import se.smelly.eat.models.MeasuredIngredient;
 import se.smelly.eat.models.Measurement;
