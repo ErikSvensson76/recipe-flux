@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -82,5 +83,35 @@ public class RecipeRepoTest {
 				.flatMapIterable(recipe -> recipe.getCategories())
 				.all(x -> x.getCategoryName().equals(CATEGORY_NAME))
 				.block());
+	}
+	
+	@Test
+	public void test_findByCategoriesCategoryNameStartingWithIgnoreCase() {
+		String searchWord = "te";
+		String expectedContent = "Te";
+		
+		assertTrue(testRepo.findByCategoriesCategoryNameStartingWithIgnoreCase(searchWord)
+				.flatMapIterable(Recipe::getCategories)
+				.map(RecipeCategory::getCategoryName)
+				.all(name -> name.startsWith(expectedContent))
+				.block());		
+	}
+	
+	@Test
+	public void test_findByRecipeNameStartingWithIgnoreCase() {
+		String searchWord = "SpA";
+		String expectedContent = "Spa";
+		long expectedNumberOfRecipes = 1;
+		
+		Flux<Recipe> result = testRepo.findByRecipeNameStartingWithIgnoreCase(searchWord);
+				
+		assertTrue(expectedNumberOfRecipes == result.count().block());
+		assertTrue(result
+				.map(Recipe::getRecipeName)
+				.all(name -> name.startsWith(expectedContent))
+				.block());
+		 
+		
+		
 	}
 }

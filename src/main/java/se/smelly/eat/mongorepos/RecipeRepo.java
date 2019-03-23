@@ -16,4 +16,8 @@ public interface RecipeRepo extends ReactiveMongoRepository<Recipe, String>{
 	
 	Flux<Recipe> findByRecipeName(String recipeName);
 	
+	Flux<Recipe> findByCategoriesCategoryNameStartingWithIgnoreCase(String categoryName);
+	
+	Flux<Recipe> findByRecipeNameStartingWithIgnoreCase(String recipeName);
+	
 }
