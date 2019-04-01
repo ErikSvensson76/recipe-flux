@@ -4,6 +4,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import se.smelly.eat.form.IngredientForm;
 import se.smelly.eat.models.Ingredient;
+import se.smelly.eat.models.MeasuredIngredient;
+import se.smelly.eat.models.Measurement;
 
 public interface IngredientService {
 
@@ -18,5 +20,7 @@ public interface IngredientService {
 	Flux<Ingredient> findByIngredientNameStartWith(String ingredientName);
 
 	Mono<Ingredient> create(Mono<IngredientForm> form);
+
+	Mono<MeasuredIngredient> create(String ingredientId, Measurement measurement, double amount);
 
 }

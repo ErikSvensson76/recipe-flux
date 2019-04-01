@@ -7,6 +7,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import se.smelly.eat.form.IngredientForm;
 import se.smelly.eat.models.Ingredient;
+import se.smelly.eat.models.MeasuredIngredient;
+import se.smelly.eat.models.Measurement;
 import se.smelly.eat.mongorepos.IngredientRepo;
 
 @Service
@@ -48,5 +50,13 @@ public class IngredientServiceReactiveImpl implements IngredientService{
 	@Override
 	public Mono<Void> delete(Ingredient ingredient){
 		return repo.delete(ingredient);
+	}
+	
+	@Override
+	public Mono<MeasuredIngredient> create(String ingredientId, Measurement measurement, double amount){
+		Mono<Ingredient> ingredientMono = repo.findById(ingredientId);
+		
+		return Mono.zip(ingredientMono, Mono.just(measurement), Mono.just(amount))
+				.map(tuple -> new MeasuredIngredient(tuple.getT1(), tuple.getT2(), tuple.getT3()));
 	}
 }

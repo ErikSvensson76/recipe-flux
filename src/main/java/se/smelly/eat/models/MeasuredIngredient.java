@@ -15,6 +15,8 @@ public class MeasuredIngredient {
 		this.measurement = measurement;
 		this.amount = amount;
 	}	
+	
+	public MeasuredIngredient() {}
 
 	public Ingredient getIngredient() {
 		return ingredient;
