@@ -3,6 +3,7 @@ package se.smelly.eat.mongorepos;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import se.smelly.eat.models.Ingredient;
 
@@ -10,6 +11,8 @@ public interface IngredientRepo extends ReactiveMongoRepository<Ingredient, Stri
 	
 	@Query("{ 'ingredientName' : ?0}")
 	Mono<Ingredient> findFirstByIngredientName(String ingredientName);
+	
+	Flux<Ingredient> findByIngredientNameStartingWithIgnoreCase(String ingredientName);
 	
 		
 
