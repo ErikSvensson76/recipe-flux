@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.assertj.core.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,8 @@ import se.smelly.eat.models.RecipeCategory;
 import se.smelly.eat.mongorepos.IngredientRepo;
 import se.smelly.eat.mongorepos.RecipeCategoryRepo;
 import se.smelly.eat.mongorepos.RecipeRepo;
+
+import static org.junit.Assert.assertEquals;
 
 @DataMongoTest
 @RunWith(SpringRunner.class)
@@ -106,9 +109,8 @@ public class RecipeRepoTest {
 		assertTrue(result
 				.map(Recipe::getRecipeName)
 				.all(name -> name.startsWith(expectedContent))
-				.block());
-		 
-		
-		
+				.block());		
 	}
+	
+
 }
