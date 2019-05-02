@@ -32,18 +32,17 @@ public class BootStrap implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {		
-		ingredientRepo.deleteAll().log().subscribe();
-		
+		//seedIngredients();		
+	}
+	
+	public void seedIngredients() {
+		ingredientRepo.deleteAll().block();		
 		List<Ingredient> ingredients = new ArrayList<>();
 		ingredients.add(new Ingredient("Tomatoes"));
 		ingredients.add(new Ingredient("Potatoes"));
 		ingredients.add(new Ingredient("Spagetti"));
 		
 		ingredientRepo.saveAll(ingredients).blockLast();
-				
-		
-		 
-		
 	}
 
 }

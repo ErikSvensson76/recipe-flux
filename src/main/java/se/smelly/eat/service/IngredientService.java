@@ -9,7 +9,7 @@ import se.smelly.eat.models.Measurement;
 
 public interface IngredientService {
 
-	Mono<Void> delete(Ingredient ingredient);
+	Mono<Void> delete(String id);
 
 	Mono<Ingredient> save(Ingredient toSave);
 

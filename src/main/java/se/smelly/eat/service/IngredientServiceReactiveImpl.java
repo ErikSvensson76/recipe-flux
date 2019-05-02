@@ -48,8 +48,8 @@ public class IngredientServiceReactiveImpl implements IngredientService{
 	}
 	
 	@Override
-	public Mono<Void> delete(Ingredient ingredient){
-		return repo.delete(ingredient);
+	public Mono<Void> delete(String id){
+		return repo.deleteById(id);
 	}
 	
 	@Override
