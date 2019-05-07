@@ -1,5 +1,7 @@
 package se.smelly.eat.service;
 
+import java.util.Comparator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +29,11 @@ public class IngredientServiceReactiveImpl implements IngredientService{
 	}
 	
 	@Override
-	public Flux<Ingredient> findByIngredientNameStartWith(String ingredientName){
+	public Flux<Ingredient> findByIngredientNameStartWithIgnoreCase(String ingredientName){
+		Comparator<Ingredient> orderByLength = (o1, o2) -> o1.getIngredientName().length() - o2.getIngredientName().length(); 
+		
 		return repo.findByIngredientNameStartingWithIgnoreCase(ingredientName)
-				.sort((o1, o2) -> o1.getIngredientName().length() - o2.getIngredientName().length());
+				.sort(orderByLength.reversed());
 	}
 	
 	@Override

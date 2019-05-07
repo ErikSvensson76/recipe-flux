@@ -17,7 +17,7 @@ public interface IngredientService {
 
 	Mono<Ingredient> findById(String id);
 
-	Flux<Ingredient> findByIngredientNameStartWith(String ingredientName);
+	Flux<Ingredient> findByIngredientNameStartWithIgnoreCase(String ingredientName);
 
 	Mono<Ingredient> create(Mono<IngredientForm> form);
 
