@@ -91,6 +91,17 @@ public class IngredientHandlerTest {
 	}
 	
 	@Test
+	public void create_status_badRequest() {
+		IngredientForm formData = new IngredientForm("H");
+		
+		webTestClient.post().uri("/ingredient")
+			.contentType(MediaType.APPLICATION_JSON_UTF8)
+			.body(Mono.just(formData), IngredientForm.class)
+			.exchange()
+			.expectStatus().isBadRequest();						
+	}
+	
+	@Test
 	public void delete_ingredient_statusOk() {
 		webTestClient.delete().uri("/ingredient/{id}", "testId")
 			.accept(MediaType.APPLICATION_JSON_UTF8)
@@ -102,11 +113,11 @@ public class IngredientHandlerTest {
 	
 	@Test
 	public void update_ingredient_statusOk() {
-		Ingredient updated = new Ingredient("testId", "UpdatedName");
+		IngredientForm updated = new IngredientForm("UpdatedName");
 		
 		webTestClient.put().uri("/ingredient/{id}", "testId")
 			.contentType(MediaType.APPLICATION_JSON_UTF8)
-			.body(Mono.just(updated), Ingredient.class)
+			.body(Mono.just(updated), IngredientForm.class)
 			.exchange()
 			.expectStatus().isOk()
 			.expectBody()
@@ -114,12 +125,23 @@ public class IngredientHandlerTest {
 	}
 	
 	@Test
+	public void update_ingredient_badRequest() {
+		IngredientForm updated = new IngredientForm("U");
+		
+		webTestClient.put().uri("/ingredient/{id}", "testId")
+			.contentType(MediaType.APPLICATION_JSON_UTF8)
+			.body(Mono.just(updated), IngredientForm.class)
+			.exchange()
+			.expectStatus().isBadRequest();			
+	}
+	
+	@Test
 	public void update_ingredient_notFound() {
-		Ingredient updated = new Ingredient("testId", "UpdatedName");
+		IngredientForm updated = new IngredientForm("UpdatedName");
 		
 		webTestClient.put().uri("/ingredient/{id}", "xxx")
 			.contentType(MediaType.APPLICATION_JSON_UTF8)
-			.body(Mono.just(updated), Ingredient.class)
+			.body(Mono.just(updated), IngredientForm.class)
 			.exchange()
 			.expectStatus().isNotFound();					
 	}
