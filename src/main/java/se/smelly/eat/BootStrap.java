@@ -32,7 +32,7 @@ public class BootStrap implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {		
-		//seedIngredients();		
+		seedIngredients();		
 	}
 	
 	public void seedIngredients() {

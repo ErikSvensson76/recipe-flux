@@ -23,6 +23,7 @@ public class IngredientRouter {
 				.route(GET("/ingredient")
 						.and(accept(MediaType.APPLICATION_JSON_UTF8)), ingredientHandler::getAllIngredients)
 				.andRoute(GET("/ingredient/{id}").and(accept(MediaType.APPLICATION_JSON_UTF8)), ingredientHandler::getById)
+				.andRoute(GET("/ingredient/find/{name}").and(accept(MediaType.APPLICATION_JSON_UTF8)), ingredientHandler::getByName)
 				.andRoute(POST("/ingredient").and(accept(MediaType.APPLICATION_JSON_UTF8)), validationHandler::handlePostRequest)
 				.andRoute(DELETE("/ingredient/{id}").and(accept(MediaType.APPLICATION_JSON_UTF8)), ingredientHandler::delete)
 				.andRoute(PUT("/ingredient/{id}").and(accept(MediaType.APPLICATION_JSON_UTF8)), validationHandler::handlePutRequest);

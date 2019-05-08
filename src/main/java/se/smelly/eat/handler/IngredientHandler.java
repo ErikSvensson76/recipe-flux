@@ -2,6 +2,8 @@ package se.smelly.eat.handler;
 
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -44,4 +46,14 @@ public class IngredientHandler {
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.body(ingredientService.delete(serverRequest.pathVariable("id")), Void.class);						
 	}	
+	
+	public Mono<ServerResponse> getByName(ServerRequest serverRequest){
+		
+		String name = serverRequest.pathVariable("name");
+		Mono<List<Ingredient>> result = ingredientService.findByIngredientNameStartWithIgnoreCase(name).collectList();
+		
+		return result.flatMap(list -> ServerResponse.ok()
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.body(fromObject(list)));		
+	}
 }

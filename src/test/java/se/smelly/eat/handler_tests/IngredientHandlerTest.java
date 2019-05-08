@@ -146,9 +146,16 @@ public class IngredientHandlerTest {
 			.expectStatus().isNotFound();					
 	}
 	
-	
-	
-	
-	
-
+	@Test
+	public void getByName_return_flux_of_two() {		
+		
+		String requestAttribute = "s";
+		
+		webTestClient.get().uri("/ingredient/find/{name}", requestAttribute)			
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+			.expectBodyList(Ingredient.class)
+			.hasSize(2);					
+	}
 }
