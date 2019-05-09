@@ -58,6 +58,24 @@ public class CategoryHandlerTest {
 			.hasSize(4);
 	}
 	
+	@Test
+	public void getById_ok() {
+		webTestClient.get().uri("/category/{id}", "testId")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+			.expectBody()
+			.jsonPath("$._id").isEqualTo("testId")
+			.jsonPath("$.categoryName").isEqualTo("Spicy");
+	}
+	
+	@Test
+	public void getById_notFound() {
+		webTestClient.get().uri("/category/{id}", "xxx")
+		.exchange()
+		.expectStatus().isNotFound();
+	}
+	
 	
 
 }

@@ -1,5 +1,6 @@
 package se.smelly.eat.handler;
 
+import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,15 @@ public class CategoryHandler {
 		return ServerResponse.ok()
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.body(recipeCategoryService.findAll(), RecipeCategory.class);
+	}
+	
+	public Mono<ServerResponse> getById(ServerRequest serverRequest){
+		Mono<RecipeCategory> categoryMono = recipeCategoryService.findById(serverRequest.pathVariable("id"));
+		
+		return categoryMono.flatMap(category -> ServerResponse.ok()
+					.contentType(MediaType.APPLICATION_JSON_UTF8)
+					.body(fromObject(category)))
+				.switchIfEmpty(ServerResponse.notFound().build());		
 	}
 	
 	
