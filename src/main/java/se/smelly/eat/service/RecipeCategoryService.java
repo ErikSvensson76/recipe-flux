@@ -13,7 +13,7 @@ public interface RecipeCategoryService {
 
 	Mono<RecipeCategory> save(RecipeCategory category);
 
-	Mono<Void> delete(RecipeCategory category);
+	Mono<Void> delete(String id);
 
 	Mono<RecipeCategory> findById(String id);
 

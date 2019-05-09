@@ -36,8 +36,8 @@ public class RecipeCategoryServiceReactiveImpl implements RecipeCategoryService 
 	}
 	
 	@Override
-	public Mono<Void> delete(RecipeCategory category){
-		return recipeCategoryRepo.delete(category);
+	public Mono<Void> delete(String id){
+		return recipeCategoryRepo.deleteById(id);
 	}
 	
 	@Override

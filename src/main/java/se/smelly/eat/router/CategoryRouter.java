@@ -21,7 +21,9 @@ public class CategoryRouter {
 	@Bean
 	public RouterFunction<ServerResponse> categoryRoute(@Autowired CategoryHandler categoryHandler){
 		return RouterFunctions.route(GET("/category").and(accept(MediaType.APPLICATION_JSON_UTF8)), categoryHandler::getAllCategories)
-				.andRoute(GET("/category/{id}").and(accept(MediaType.APPLICATION_JSON_UTF8)), categoryHandler::getById);
+				.andRoute(GET("/category/{id}").and(accept(MediaType.APPLICATION_JSON_UTF8)), categoryHandler::getById)
+				.andRoute(GET("/category/find/{name}").and(accept(MediaType.APPLICATION_JSON_UTF8)), categoryHandler::getByName)
+				.andRoute(DELETE("/category/{id}").and(accept(MediaType.APPLICATION_JSON_UTF8)), categoryHandler::delete);
 	}
 
 }

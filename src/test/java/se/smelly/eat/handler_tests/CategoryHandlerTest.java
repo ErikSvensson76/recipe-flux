@@ -76,6 +76,25 @@ public class CategoryHandlerTest {
 		.expectStatus().isNotFound();
 	}
 	
+	@Test
+	public void delete_ok() {
+		webTestClient.delete().uri("/category/{id}", "testId")
+			.accept(MediaType.APPLICATION_JSON_UTF8)
+			.exchange()
+			.expectStatus().isOk()
+			.expectBody(Void.class);		
+	}
+	
+	@Test
+	public void getByName_return_flux_of_two() {
+		webTestClient.get().uri("/category/find/{name}", "week")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+			.expectBodyList(RecipeCategory.class)
+			.hasSize(2);			
+	}
+	
 	
 
 }
