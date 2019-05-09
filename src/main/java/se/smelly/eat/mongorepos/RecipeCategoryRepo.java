@@ -7,6 +7,6 @@ import se.smelly.eat.models.RecipeCategory;
 
 public interface RecipeCategoryRepo extends ReactiveMongoRepository<RecipeCategory, String>{
 	
-	Flux<RecipeCategory> findByCategoryName(String categoryName);
+	Flux<RecipeCategory> findByCategoryNameStartingWithIgnoreCase(String categoryName);
 
 }

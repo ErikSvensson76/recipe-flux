@@ -36,7 +36,7 @@ public class RecipeCategoryRepoTest {
 	public void test_FindByCategoryName_return_list_all_match_param() {
 		String param = "Test";
 		
-		assertTrue(testRepo.findByCategoryName(param)
+		assertTrue(testRepo.findByCategoryNameStartingWithIgnoreCase(param)
 				.all(x -> x.getCategoryName().equals(param))
 				.block());				
 	}

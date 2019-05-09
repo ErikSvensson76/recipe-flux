@@ -27,7 +27,7 @@ public class RecipeCategoryServiceReactiveImpl implements RecipeCategoryService 
 	
 	@Override
 	public Flux<RecipeCategory> findByCategoryName(String categoryName){
-		return recipeCategoryRepo.findByCategoryName(categoryName);		
+		return recipeCategoryRepo.findByCategoryNameStartingWithIgnoreCase(categoryName);		
 	}
 	
 	@Override
